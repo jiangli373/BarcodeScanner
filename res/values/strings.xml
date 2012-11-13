@@ -9,5 +9,8 @@
     <string name="title_activity_show_result">ShowResultActivity</string>
     <string name="contentslable">内容</string>
     <string name="back">返回</string>
+    <string name="authorlabel">作者</string>
+    <string name="classlabel">分类</string>
+    <string name="positionabel">位置</string>
 
 </resources>

@@ -1,0 +1,1 @@
+package com.example.util;public class Global {	public static final String DATABASE_FILENAME = "marc.db";}

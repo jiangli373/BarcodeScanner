@@ -16,12 +16,28 @@
         android:id="@+id/content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/contentslable"
-        android:layout_alignBottom="@+id/contentslable"
+        android:layout_above="@+id/authorlabel"
         android:layout_alignParentRight="true"
-        android:layout_marginLeft="48dp"
-        android:layout_toRightOf="@+id/contentslable"
- />
+        android:layout_toRightOf="@+id/back"
+        android:text="@string/authorlabel" />
+
+    <TextView
+        android:id="@+id/authorlabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/contentslable"
+        android:layout_marginTop="43dp"
+        android:text="@string/authorlabel" />
+
+    <TextView
+        android:id="@+id/author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/authorlabel"
+        android:layout_alignLeft="@+id/content"
+        android:layout_alignParentRight="true"
+        android:text="@string/authorlabel" />
 
     <Button
         android:id="@+id/back"
@@ -30,5 +46,42 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:text="@string/back" />
+
+    <TextView
+        android:id="@+id/classlabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:text="@string/classlabel" />
+
+    <TextView
+        android:id="@+id/classnumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/classlabel"
+        android:layout_alignBottom="@+id/classlabel"
+        android:layout_alignLeft="@+id/author"
+        android:layout_alignParentRight="true"
+        android:text="@string/classlabel" />
+
+    <TextView
+        android:id="@+id/positionlabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/classlabel"
+        android:layout_marginTop="46dp"
+        android:text="@string/positionabel" />
+
+    <TextView
+        android:id="@+id/postion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/positionlabel"
+        android:layout_alignBottom="@+id/positionlabel"
+        android:layout_alignLeft="@+id/classnumber"
+        android:layout_alignParentRight="true"
+        android:text="@string/positionabel" />
 
 </RelativeLayout>

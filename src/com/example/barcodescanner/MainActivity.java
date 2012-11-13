@@ -1,27 +1,73 @@
 package com.example.barcodescanner;
 
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.text.ParseException;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.Toast;
+
+import com.example.db.DataService;
+import com.example.model.BookInfo;
 
 public class MainActivity extends Activity implements OnClickListener{
 
 	private Button scanner,exit;
+	private final String DATABASE_FILENAME = "marc.db";
+	 DataService ds = null;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        if (!new File(
+//				"/data/data/com.witmob.babyshow/files/marc.db")
+//				.exists()) {
+			importDatatbase();
+//		}
         scanner = (Button)findViewById(R.id.scanner);
         exit = (Button)findViewById(R.id.exit);
         scanner.setOnClickListener(this);
         exit.setOnClickListener(this);
     }
+    
+    
+
+	private void importDatatbase() {
+		try {
+			
+			File file = new File(DATABASE_FILENAME);
+			if (!file.exists()) {
+				InputStream is = getResources().openRawResource(R.raw.marc);
+				FileOutputStream fileOutputStream = openFileOutput(
+						DATABASE_FILENAME, 0);
+				byte[] buffer = new byte[8192];
+				int count = 0;
+
+				while ((count = is.read(buffer)) > 0) {
+					fileOutputStream.write(buffer, 0, count);
+				}
+				fileOutputStream.close();
+				is.close();
+				ds = new DataService(this);
+				ds.createNewTable();
+				ds.updateTable();
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			Log.e("tag", e.getMessage(), e);
+		}
+	}
+    
+    
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
@@ -41,7 +87,9 @@ public class MainActivity extends Activity implements OnClickListener{
         if (requestCode == 0) {
             if (resultCode == RESULT_OK) {
             	Intent ii = new Intent();
-            	ii.putExtra("content", intent.getStringExtra("SCAN_RESULT"));
+            	String ISBN = intent.getStringExtra("SCAN_RESULT");
+            	         	
+            	ii.putExtra("content", ISBN);
             	ii.setClass(this,ShowResultActivity.class);
 			    startActivity(ii);
             } else if (resultCode == RESULT_CANCELED) {
