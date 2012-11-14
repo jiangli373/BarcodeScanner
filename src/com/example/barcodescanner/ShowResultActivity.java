@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ShowResultActivity extends Activity implements OnClickListener{
 
@@ -38,6 +39,8 @@ public class ShowResultActivity extends Activity implements OnClickListener{
     		classnum.setText(bi.getClassifyNumber());
     		String thispostion = ClassCategory.getpostion(bi.getClassifyNumber());
     		postion.setText(thispostion);
+    	}else{
+    		Toast.makeText(this, "没有找到图书", 5000).show();
     	}  
        
     }

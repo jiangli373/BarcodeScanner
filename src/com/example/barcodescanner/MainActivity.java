@@ -93,9 +93,9 @@ public class MainActivity extends Activity implements OnClickListener{
             	ii.setClass(this,ShowResultActivity.class);
 			    startActivity(ii);
             } else if (resultCode == RESULT_CANCELED) {
-            	Intent ii = new Intent();
-            	ii.setClass(this,ShowResultActivity.class);
-			   startActivity(ii);
+//            	Intent ii = new Intent();
+//            	ii.setClass(this,ShowResultActivity.class);
+//			   startActivity(ii);
             }
         }
     }
