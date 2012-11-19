@@ -22,7 +22,7 @@
         </activity>
         <activity
             android:name=".ShowResultActivity"
-            android:label="@string/title_activity_show_result" >
+            android:label="@string/title_activity_main" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="none" />

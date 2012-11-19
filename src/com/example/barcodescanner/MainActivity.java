@@ -57,9 +57,9 @@ public class MainActivity extends Activity implements OnClickListener{
 				}
 				fileOutputStream.close();
 				is.close();
-				ds = new DataService(this);
-				ds.createNewTable();
-				ds.updateTable();
+//				ds = new DataService(this);
+//				ds.createNewTable();
+//				ds.updateTable();
 			}
 		} catch (Exception e) {
 			// TODO: handle exception

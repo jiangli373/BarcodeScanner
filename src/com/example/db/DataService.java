@@ -78,23 +78,26 @@ public class DataService {
 	 */
 	public BookInfo getBookInfoByIsbn(String ISBN){
 		BookInfo bi = null;
+//		ISBN = "7118019410";
 		SQLiteDatabase db = databaseHelper.getReadableDatabase();
-		Cursor newcursor = db
-				.rawQuery("SELECT * FROM newtable where isbn = ? ", new String[] {ISBN});
-       if(newcursor.moveToFirst()){
-    	   Cursor cursor = db.rawQuery("SELECT * FROM marc where id = ? ", new String[] {newcursor.getInt(newcursor.getColumnIndex("id"))+""});
+//		Cursor newcursor = db
+//				.rawQuery("SELECT * FROM newtable where isbn = ? ", new String[] {ISBN});
+//       if(newcursor.moveToFirst()){
+//    	   Cursor cursor = db.rawQuery("SELECT * FROM marc where id = ? ", new String[] {newcursor.getInt(newcursor.getColumnIndex("id"))+""});
+    	   Cursor cursor = db.rawQuery("SELECT * FROM marc where isbn = ? ", new String[] {ISBN});
+
     	   if(cursor.moveToFirst()){
     		bi = new BookInfo();
    			bi.setId(cursor.getInt(cursor.getColumnIndex("id")));
    			bi.setISBN(cursor.getString(cursor.getColumnIndex("ISBN")));
    			bi.setBookName(cursor.getString(cursor.getColumnIndex("bookName")));
    			bi.setAuthor(cursor.getString(cursor.getColumnIndex("author")));
-   			bi.setClassifyNumber(cursor.getString(cursor.getColumnIndex("classifyNumber")));
+   			bi.setClassifyNumber(cursor.getString(cursor.getColumnIndex("holdingClassify")));
    			cursor.close(); 
     	   }
     	  
-		}
-       newcursor.close();// 游标关闭
+//		}
+//       newcursor.close();// 游标关闭
 	   db.close();
 	   return bi;
 	}
