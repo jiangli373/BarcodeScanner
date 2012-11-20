@@ -15,14 +15,17 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.db.DataService;
 import com.example.model.BookInfo;
 
 public class MainActivity extends Activity implements OnClickListener{
 
-	private Button scanner,exit;
+	private Button scanner,exit,query;
 	private final String DATABASE_FILENAME = "marc.db";
+	private EditText isbn;
 	 DataService ds = null;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,9 +37,12 @@ public class MainActivity extends Activity implements OnClickListener{
 			importDatatbase();
 //		}
         scanner = (Button)findViewById(R.id.scanner);
+        query = (Button)findViewById(R.id.query);
         exit = (Button)findViewById(R.id.exit);
+        isbn = (EditText)findViewById(R.id.isbn);
         scanner.setOnClickListener(this);
         exit.setOnClickListener(this);
+        query.setOnClickListener(this);
     }
     
     
@@ -57,9 +63,6 @@ public class MainActivity extends Activity implements OnClickListener{
 				}
 				fileOutputStream.close();
 				is.close();
-//				ds = new DataService(this);
-//				ds.createNewTable();
-//				ds.updateTable();
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -80,6 +83,18 @@ public class MainActivity extends Activity implements OnClickListener{
 			 Intent intent = new Intent("com.google.zxing.client.android.SCAN");
              intent.putExtra("SCAN_MODE", "PRODUCT_MODE");
              startActivityForResult(intent, 0);
+		}else if(v.getId()==R.id.query){
+			
+			String isbnname = isbn.getText().toString();
+			if(!isbnname.equals("")){
+				Intent ii = new Intent();
+				ii.putExtra("content", isbnname);
+	        	ii.setClass(this,ShowResultActivity.class);
+			    startActivity(ii);
+			}else{
+				Toast.makeText(this, "请输入ISBN号", 5000).show();
+			}
+        	
 		}		
 		
 	}

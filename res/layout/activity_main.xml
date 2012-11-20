@@ -1,23 +1,59 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent" 
+    android:orientation="vertical">
 
-    <Button
-        android:id="@+id/scanner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="99dp"
-        android:text="@string/scanner" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
 
-    <Button
-        android:id="@+id/exit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/scanner"
-        android:layout_centerVertical="true"
-        android:text="@string/exit" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="66dp"
+            android:text="@string/ISBN" />
 
-</RelativeLayout>
+        <EditText
+            android:id="@+id/isbn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.18"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="@string/hint" >
+
+            <requestFocus />
+        </EditText>
+
+        <Button
+            android:id="@+id/query"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/query" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <Button
+            android:id="@+id/exit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/exit" />
+
+        <Button
+            android:id="@+id/scanner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/exit"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="52dp"
+            android:text="@string/scanner" />
+
+    </RelativeLayout>
+
+</LinearLayout>

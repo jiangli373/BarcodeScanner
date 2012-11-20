@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 public class ShowResultActivity extends Activity implements OnClickListener{
 
-	private TextView bookname,author,classnum,postion;
+	private TextView bookname,author,classnum,postion,isbnno;
 	private Button bt;
 	private ClassCategory cc = new ClassCategory();
     @Override
@@ -25,6 +25,7 @@ public class ShowResultActivity extends Activity implements OnClickListener{
         setContentView(R.layout.activity_show_result);
         Intent intent = getIntent();
         String conent = intent.getStringExtra("content");
+        isbnno = (TextView)findViewById(R.id.ISBNNO);
         bookname = (TextView)findViewById(R.id.content); 
         author = (TextView)findViewById(R.id.author); 
         classnum = (TextView)findViewById(R.id.classnumber); 
@@ -34,6 +35,7 @@ public class ShowResultActivity extends Activity implements OnClickListener{
         DataService ds = new DataService(this);
     	BookInfo bi = ds.getBookInfoByIsbn(conent);
     	if(bi!=null){
+    		isbnno.setText(bi.getISBN());
     		bookname.setText(bi.getBookName());
     		author.setText(bi.getAuthor());
     		classnum.setText(bi.getClassifyNumber());
