@@ -70,7 +70,6 @@ public class DataService {
 		}
 		return arrayList;
 	}
-	
 	/**
 	 * 
 	 * @param ISBN
@@ -78,13 +77,14 @@ public class DataService {
 	 */
 	public BookInfo getBookInfoByIsbn(String ISBN){
 		BookInfo bi = null;
-//		ISBN = "7118019410";
+		String result = "";
+		if(ISBN.length()==13){
+			result = isbn13to10Digits(ISBN);
+		}else{
+			result = ISBN; 
+		}
 		SQLiteDatabase db = databaseHelper.getReadableDatabase();
-//		Cursor newcursor = db
-//				.rawQuery("SELECT * FROM newtable where isbn = ? ", new String[] {ISBN});
-//       if(newcursor.moveToFirst()){
-//    	   Cursor cursor = db.rawQuery("SELECT * FROM marc where id = ? ", new String[] {newcursor.getInt(newcursor.getColumnIndex("id"))+""});
-    	   Cursor cursor = db.rawQuery("SELECT * FROM marc where isbn = ? ", new String[] {ISBN});
+    	   Cursor cursor = db.rawQuery("SELECT * FROM marc where isbn = ? ", new String[] {result});
 
     	   if(cursor.moveToFirst()){
     		bi = new BookInfo();
@@ -101,4 +101,52 @@ public class DataService {
 	   db.close();
 	   return bi;
 	}
+	
+	public String isbn13to10Digits ( String theIsbn13 ) {
+
+
+		 if ( theIsbn13 == null || theIsbn13.trim().equalsIgnoreCase("") )
+
+		return null;
+
+
+		 theIsbn13 = theIsbn13.replaceAll("-","").replaceAll(" ","");
+
+		 if (theIsbn13.length()!= 13)
+
+		 	return null;
+
+
+		 String myIsbn10 = theIsbn13.substring(3, 12);
+
+		 int checksum = 0;
+
+		 int weight = 10;
+
+		 for ( int i = 0; i < myIsbn10.length(); i++ ){
+
+		 	checksum += (int) Character.getNumericValue( myIsbn10.charAt(i) )* weight;
+
+		weight--;
+
+		 }
+
+		 checksum = 11-(checksum % 11);
+
+		 if (checksum == 10)
+
+		 	myIsbn10 += "X";
+
+		 else if (checksum == 11)
+
+		 	myIsbn10 += "0";
+
+		 else
+
+		 	myIsbn10 += checksum;
+
+		 return myIsbn10;
+
+		}
+	
 }

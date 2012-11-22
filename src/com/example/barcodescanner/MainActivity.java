@@ -31,11 +31,7 @@ public class MainActivity extends Activity implements OnClickListener{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        if (!new File(
-//				"/data/data/com.witmob.babyshow/files/marc.db")
-//				.exists()) {
 			importDatatbase();
-//		}
         scanner = (Button)findViewById(R.id.scanner);
         query = (Button)findViewById(R.id.query);
         exit = (Button)findViewById(R.id.exit);
@@ -65,7 +61,6 @@ public class MainActivity extends Activity implements OnClickListener{
 				is.close();
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
 			Log.e("tag", e.getMessage(), e);
 		}
 	}
@@ -73,7 +68,6 @@ public class MainActivity extends Activity implements OnClickListener{
     
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
 		if(v.getId()==R.id.exit){
 			Intent intent = new Intent(Intent.ACTION_MAIN);
 			intent.addCategory(Intent.CATEGORY_HOME);
