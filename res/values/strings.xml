@@ -8,12 +8,12 @@
     <string name="scanner">扫描</string>
     <string name="exit">退出</string>
     <string name="title_activity_show_result">ShowResultActivity</string>
-    <string name="contentslable">书名</string>
+    <string name="contentslable">书名:</string>
     <string name="back">返回</string>
-    <string name="authorlabel">作者</string>
-    <string name="classlabel">分类</string>
-    <string name="positionabel">位置</string>
-    <string name="ISBN">ISBN</string>
+    <string name="authorlabel">作者:</string>
+    <string name="classlabel">分类:</string>
+    <string name="positionabel">位置:</string>
+    <string name="ISBN">ISBN号:</string>
      <string name="query">查询</string>
      <string name="hint">请输入ISBN号</string>
 </resources>

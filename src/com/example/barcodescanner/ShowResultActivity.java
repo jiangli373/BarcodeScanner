@@ -32,28 +32,18 @@ public class ShowResultActivity extends Activity implements OnClickListener{
         postion = (TextView)findViewById(R.id.postion); 
         bt = (Button)findViewById(R.id.back);
         bt.setOnClickListener(this);
-        DataService ds = new DataService(this);
-    	BookInfo bi = ds.getBookInfoByIsbn(conent);
-    	if(bi!=null){
-    		isbnno.setText(bi.getISBN());
-    		bookname.setText(bi.getBookName());
-    		author.setText(bi.getAuthor());
-    		classnum.setText(bi.getClassifyNumber());
-    		String thispostion = ClassCategory.getpostion(bi.getClassifyNumber());
-    		postion.setText(thispostion);
-    	}else{
-    		Toast.makeText(this, "没有找到图书", 5000).show();
-    	}  
-       
+    		isbnno.setText(intent.getStringExtra("ISBN"));
+    		bookname.setText(intent.getStringExtra("bookname"));
+    		author.setText(intent.getStringExtra("author"));
+    		classnum.setText(intent.getStringExtra("classno"));
+    		postion.setText(intent.getStringExtra("position"));
     }
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
 		this.finish();
 	}
 	@Override
 	public void finish() {
-		// TODO Auto-generated method stub
 		super.finish();
 	} 
 	

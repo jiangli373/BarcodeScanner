@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.db.DataService;
 import com.example.model.BookInfo;
+import com.example.util.ClassCategory;
 
 public class MainActivity extends Activity implements OnClickListener{
 
@@ -81,10 +82,7 @@ public class MainActivity extends Activity implements OnClickListener{
 			
 			String isbnname = isbn.getText().toString();
 			if(!isbnname.equals("")){
-				Intent ii = new Intent();
-				ii.putExtra("content", isbnname);
-	        	ii.setClass(this,ShowResultActivity.class);
-			    startActivity(ii);
+				searchResult(isbnname);
 			}else{
 				Toast.makeText(this, "请输入ISBN号", 5000).show();
 			}
@@ -97,16 +95,29 @@ public class MainActivity extends Activity implements OnClickListener{
             if (resultCode == RESULT_OK) {
             	Intent ii = new Intent();
             	String ISBN = intent.getStringExtra("SCAN_RESULT");
-            	         	
-            	ii.putExtra("content", ISBN);
-            	ii.setClass(this,ShowResultActivity.class);
-			    startActivity(ii);
+             	searchResult(ISBN);
             } else if (resultCode == RESULT_CANCELED) {
-//            	Intent ii = new Intent();
-//            	ii.setClass(this,ShowResultActivity.class);
-//			   startActivity(ii);
             }
         }
     }
 
+	public void searchResult(String ISBN){
+		Bundle bundle = new Bundle();
+		Intent intent = new Intent();
+		DataService ds = new DataService(this);
+    	BookInfo bi = ds.getBookInfoByIsbn(ISBN);
+    	if(bi!=null){
+    		bundle.putString("ISBN", bi.getISBN());
+    		bundle.putString("bookname",bi.getBookName());
+    		bundle.putString("author",bi.getAuthor());
+    		bundle.putString("classno",bi.getClassifyNumber());
+    		String thispostion = ClassCategory.getpostion(bi.getClassifyNumber());
+    		bundle.putString("position",thispostion);
+    		intent.putExtras(bundle);
+    		intent.setClass(this,ShowResultActivity.class);
+		    startActivity(intent);
+    	}else{
+    		Toast.makeText(this, "没有找到图书", 5000).show();
+    	}  
+	}
 }
